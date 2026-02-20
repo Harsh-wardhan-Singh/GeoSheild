@@ -1,28 +1,15 @@
-import random
+import numpy as np
 
-def simulate_shock(tariff, component_share, base_cost, margin):
-    """
-    tariff = 20  (percent)
-    component_share = 50  (percent of cost from that country)
-    base_cost = 100
-    margin = 20  (percent)
-    """
+def simulate_shock(total_exposure, base_margin, import_cost_share):
 
-    # Cost increase due to tariff
-    tariff_impact = (tariff / 100) * (component_share / 100) * base_cost
+    # Shock proportional to exposure and cost share
+    cost_increase = (total_exposure / 100) * import_cost_share
 
-    # Add small volatility (optional demo realism)
-    volatility = random.uniform(-0.02, 0.02) * base_cost
-
-    new_cost = base_cost + tariff_impact + volatility
-
-    old_margin_value = base_cost * (margin / 100)
-    new_margin_value = (base_cost + old_margin_value) - new_cost
-
-    new_margin_percent = (new_margin_value / new_cost) * 100
+    new_margin = base_margin - cost_increase
 
     return {
-        "old_margin_percent": margin,
-        "new_margin_percent": round(new_margin_percent, 2),
-        "cost_change": round(new_cost - base_cost, 2)
+        "cost_increase_percent": round(cost_increase, 2),
+        "old_margin": base_margin,
+        "new_margin": round(new_margin, 2),
+        "margin_drop": round(base_margin - new_margin, 2)
     }

@@ -1,5 +1,7 @@
-{
-  "China": [65, 68, 70, 73, 75],
-  "India": [35, 37, 39, 40, 40],
-  "Vietnam": [30, 32, 33, 34, 35]
-}
+[
+  {"date": "2026-01-01", "China": 55, "India": 38, "Vietnam": 30},
+  {"date": "2026-01-10", "China": 62, "India": 40, "Vietnam": 32},
+  {"date": "2026-01-20", "China": 75, "India": 45, "Vietnam": 35},
+  {"date": "2026-02-01", "China": 82, "India": 47, "Vietnam": 38},
+  {"date": "2026-02-10", "China": 90, "India": 50, "Vietnam": 42}
+]

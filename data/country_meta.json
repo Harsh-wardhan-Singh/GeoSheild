@@ -1,18 +1,6 @@
 {
-  "China": {
-    "risk": 75,
-    "stability": 6
-  },
-  "Vietnam": {
-    "risk": 35,
-    "stability": 8
-  },
-  "India": {
-    "risk": 40,
-    "stability": 7
-  },
-  "Mexico": {
-    "risk": 45,
-    "stability": 7
-  }
+  "China": {"base_risk": 60, "stability": 5},
+  "India": {"base_risk": 40, "stability": 7},
+  "Vietnam": {"base_risk": 35, "stability": 8},
+  "USA": {"base_risk": 30, "stability": 9}
 }
