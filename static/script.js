@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================
-       THEME TOGGLE (PERSISTENT)
+       THEME TOGGLE
     ========================= */
 
     const themeToggle = document.getElementById("theme-toggle");
 
-    // Load saved theme
     if (localStorage.getItem("theme") === "light") {
         document.body.classList.add("light-mode");
         themeToggle.innerText = "Toggle Dark Mode";
@@ -23,6 +22,25 @@ document.addEventListener("DOMContentLoaded", function () {
             themeToggle.innerText = "Toggle Light Mode";
         }
     });
+
+
+    /* =========================
+       FLAG HELPER
+    ========================= */
+
+    function getFlag(countryName) {
+        const flags = {
+            "China": "🇨🇳",
+            "Germany": "🇩🇪",
+            "Vietnam": "🇻🇳",
+            "Japan": "🇯🇵",
+            "Malaysia": "🇲🇾",
+            "US": "🇺🇸",
+            "India": "🇮🇳",
+            "South Korea": "🇰🇷"
+        };
+        return flags[countryName] || "🌍";
+    }
 
 
     /* =========================
@@ -52,184 +70,141 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const scenarioButtons = document.querySelectorAll(".scenario-btn");
 
-    let businessProfile = {};
-    let vulnerabilityScore = 0;
-
-
-    /* =========================
-       FLAG HELPER
-    ========================= */
-
-    function getFlag(countryName) {
-        const flags = {
-            "China": "🇨🇳",
-            "Germany": "🇩🇪",
-            "Vietnam": "🇻🇳",
-            "Japan": "🇯🇵",
-            "Malaysia": "🇲🇾",
-            "US": "🇺🇸",
-            "India": "🇮🇳",
-            "South Korea": "🇰🇷"
-        };
-        return flags[countryName] || "🌍";
-    }
 
 
     /* =========================
        NAVIGATION
     ========================= */
 
+    function scrollTopSmooth() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     goRisk.addEventListener("click", () => {
         homeSection.style.display = "none";
         riskSection.style.display = "block";
+        scrollTopSmooth();
     });
 
     goSimulation.addEventListener("click", () => {
         homeSection.style.display = "none";
         simulationSection.style.display = "block";
+        scrollTopSmooth();
     });
 
     backHome1.addEventListener("click", () => {
         riskSection.style.display = "none";
         riskReport.style.display = "none";
         homeSection.style.display = "block";
+        scrollTopSmooth();
     });
 
     backHome2.addEventListener("click", () => {
         simulationSection.style.display = "none";
         homeSection.style.display = "block";
+        scrollTopSmooth();
     });
 
 
+
     /* =========================
-       RISK ANALYSIS FLOW
+       AI RISK ANALYSIS (REAL BACKEND)
     ========================= */
 
-    analyzeBtn.addEventListener("click", function () {
+    analyzeBtn.addEventListener("click", async function () {
 
         const country1 = document.getElementById("country1").value;
-        const dep1 = parseFloat(document.getElementById("dep1").value) / 100;
+        const dep1 = parseFloat(document.getElementById("dep1").value);
 
         const country2 = document.getElementById("country2").value;
-        const dep2 = parseFloat(document.getElementById("dep2").value) / 100;
+        const dep2 = parseFloat(document.getElementById("dep2").value);
 
         const country3 = document.getElementById("country3").value;
-        const dep3 = parseFloat(document.getElementById("dep3").value) / 100;
+        const dep3 = parseFloat(document.getElementById("dep3").value);
 
         const baseMargin = parseFloat(document.getElementById("base-margin").value);
-        const importShare = parseFloat(document.getElementById("import-share").value) / 100;
+        const importShare = parseFloat(document.getElementById("import-share").value);
 
-        businessProfile = {
-            countries: [
-                { name: country1, dependency: dep1 },
-                { name: country2, dependency: dep2 },
-                { name: country3, dependency: dep3 }
-            ],
-            baseMargin: baseMargin,
-            importShare: importShare
+        const payload = {
+        mode: "ai",
+        dependencies: {
+            [country1]: parseFloat(dep1),
+            [country2]: parseFloat(dep2),
+            [country3]: parseFloat(dep3)
+        },
+        base_margin: parseFloat(baseMargin),
+        import_cost_share: parseFloat(importShare)
         };
 
-        calculateVulnerability();
-        generateExecutiveReport();
-        generateRiskAdvisory();
+        try {
 
-        riskReport.style.display = "block";
+            const response = await fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            renderRiskResults(data);
+
+        } catch (error) {
+            alert("Backend connection error.");
+        }
     });
 
 
-    function calculateVulnerability() {
+    function renderRiskResults(data) {
 
-        const mockRiskScores = {
-            "China": 72,
-            "Vietnam": 35,
-            "Germany": 20
-        };
+        const risk = data.risk_analysis;
+        const profit = data.profit_analysis;
+        const vulnerability = data.vulnerability_analysis;
 
-        vulnerabilityScore = 0;
+        const dominantRegion = Object.keys(vulnerability.country_exposure)
+            .reduce((a, b) =>
+                vulnerability.country_exposure[a] > vulnerability.country_exposure[b] ? a : b
+            );
 
-        businessProfile.countries.forEach(country => {
-            const risk = mockRiskScores[country.name] || 40;
-            vulnerabilityScore += country.dependency * risk;
-        });
+        const flag = getFlag(dominantRegion);
 
-        vulnerabilityScore = parseFloat(vulnerabilityScore.toFixed(1));
-    }
-
-
-    function generateExecutiveReport() {
-
-        let exposureLevel, sensitivity, profitStability;
-        let exposureClass, sensitivityClass, profitClass;
-
-        if (vulnerabilityScore > 60) {
-            exposureLevel = "HIGH";
-            sensitivity = "SEVERE";
-            profitStability = "FRAGILE";
-            exposureClass = sensitivityClass = profitClass = "status-high";
-        } else if (vulnerabilityScore > 40) {
-            exposureLevel = "MODERATE";
-            sensitivity = "ELEVATED";
-            profitStability = "UNSTABLE";
-            exposureClass = sensitivityClass = profitClass = "status-medium";
-        } else {
-            exposureLevel = "LOW";
-            sensitivity = "MANAGEABLE";
-            profitStability = "STABLE";
-            exposureClass = sensitivityClass = profitClass = "status-low";
-        }
-
-        const dominant = businessProfile.countries.reduce((prev, current) =>
-            (prev.dependency > current.dependency) ? prev : current
-        );
-
-        const flag = getFlag(dominant.name);
+        let exposureClass =
+            risk.risk_level === "Critical" || risk.risk_level === "High"
+                ? "status-high"
+                : risk.risk_level === "Medium"
+                ? "status-medium"
+                : "status-low";
 
         document.getElementById("metric-exposure").innerHTML =
-            `<span class="${exposureClass}">${exposureLevel}</span>`;
+            `<span class="${exposureClass}">${risk.risk_level.toUpperCase()}</span>`;
 
         document.getElementById("metric-region").innerHTML =
-            `${flag} ${dominant.name}`;
+            `${flag} ${dominantRegion}`;
 
         document.getElementById("metric-sensitivity").innerHTML =
-            `<span class="${sensitivityClass}">${sensitivity}</span>`;
+            vulnerability.total_vulnerability_score;
 
         document.getElementById("metric-profit").innerHTML =
-            `<span class="${profitClass}">${profitStability}</span>`;
+            `${profit.current_predicted_margin}%`;
 
         document.getElementById("summary-content").innerHTML = `
-            Concentration of ${(dominant.dependency * 100).toFixed(0)}% sourcing in ${flag} ${dominant.name}
-            materially amplifies exposure to tariff escalation and export controls.
-            <br><br>
-            Structural diversification would reduce systemic vulnerability.
+            AI Risk Level: ${risk.risk_level} (${risk.risk_confidence_percent}% confidence).<br><br>
+            Profit drop under current exposure: ${profit.profit_drop}%.
         `;
 
-        document.getElementById("risk-drivers").innerHTML = `
-            • ${flag} ${dominant.name} accounts for ${(dominant.dependency * 100).toFixed(0)}% of sourcing<br>
-            • Elevated tariff pass-through sensitivity<br>
-            • Currency volatility exposure<br>
-            • Limited supplier diversification buffer
-        `;
+        document.getElementById("risk-drivers").innerHTML =
+            Object.entries(vulnerability.country_exposure)
+                .map(([country, score]) => `• ${getFlag(country)} ${country}: ${score}`)
+                .join("<br>");
+
+        document.getElementById("recommendation-content").innerHTML =
+            data.optimization.optimization_message;
+
+        riskReport.style.display = "block";
     }
 
-
-    function generateRiskAdvisory() {
-
-        let advisory;
-
-        if (vulnerabilityScore > 60) {
-            advisory = "Immediate diversification recommended. Reduce regional concentration and implement hedging strategies.";
-        } else if (vulnerabilityScore > 40) {
-            advisory = "Moderate exposure detected. Gradual supplier diversification advised.";
-        } else {
-            advisory = "Exposure within manageable range. Continue monitoring geopolitical developments.";
-        }
-
-        document.getElementById("recommendation-content").innerHTML = advisory;
-    }
 
 
     /* =========================
-       SIMULATION ENGINE
+       SHOCK SIMULATION (REAL BACKEND)
     ========================= */
 
     scenarioButtons.forEach(button => {
@@ -268,151 +243,95 @@ document.addEventListener("DOMContentLoaded", function () {
     disruptionLevelSelect.addEventListener("change", updateShockSimulation);
 
 
-    function updateShockSimulation() {
+    async function updateShockSimulation() {
 
         tariffValue.textContent = tariffSlider.value;
         currencyValue.textContent = currencySlider.value;
 
-        const tariff = parseFloat(tariffSlider.value) / 100;
-        const currency = parseFloat(currencySlider.value) / 100;
-        const exportBan = exportBanCheckbox.checked;
-        const disruptionLevel = disruptionLevelSelect.value;
+        const payload = {
+            mode: "shock",
+            tariff_percent: parseFloat(tariffSlider.value),
+            export_restrictions: exportBanCheckbox.checked,
+            supply_disruption_level: disruptionLevelSelect.value,
+            currency_volatility_percent: parseFloat(currencySlider.value),
+            base_margin: parseFloat(document.getElementById("base-margin").value),
+            import_cost_share: parseFloat(document.getElementById("import-share").value),
+            dependency_ratio: parseFloat(document.getElementById("dependency-ratio").value),
+            industry_elasticity: document.getElementById("industry-elasticity").value
+        };
 
-        let disruptionImpact = 0;
-        if (disruptionLevel === "low") disruptionImpact = 0.03;
-        if (disruptionLevel === "medium") disruptionImpact = 0.07;
-        if (disruptionLevel === "high") disruptionImpact = 0.12;
+        try {
 
-        let shockImpact =
-            (tariff * 0.4) +
-            (currency * 0.5) +
-            disruptionImpact +
-            (exportBan ? 0.10 : 0);
+            const response = await fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-        const baseMargin = 20;
-        const marginDrop = baseMargin * shockImpact;
-        const percentDrop = ((marginDrop / baseMargin) * 100).toFixed(1);
+            const data = await response.json();
+            renderShockResults(data.shock_analysis);
 
-        let shockLevel, riskClass, colorClass, meterColor;
-
-        if (shockImpact > 0.25) {
-            shockLevel = "SEVERE";
-            riskClass = "CRITICAL";
-            colorClass = "status-high";
-            meterColor = "#ef4444";
-        } else if (shockImpact > 0.15) {
-            shockLevel = "ELEVATED";
-            riskClass = "HIGH";
-            colorClass = "status-medium";
-            meterColor = "#f59e0b";
-        } else {
-            shockLevel = "LOW";
-            riskClass = "MANAGEABLE";
-            colorClass = "status-low";
-            meterColor = "#22c55e";
+        } catch (error) {
+            console.error("Shock simulation error:", error);
         }
+    }
+
+
+    function renderShockResults(shock) {
+
+        let colorClass =
+            shock.risk_classification === "Critical" || shock.risk_classification === "High"
+                ? "status-high"
+                : shock.risk_classification === "Medium"
+                ? "status-medium"
+                : "status-low";
 
         document.getElementById("sim-shock-level").innerHTML =
-            `<span class="${colorClass}">${shockLevel}</span>`;
+            `<span class="${colorClass}">${shock.trade_shock_level}</span>`;
 
         document.getElementById("sim-margin-impact").innerHTML =
-            `<span class="${colorClass}">-${percentDrop}%</span>`;
+            `<span class="${colorClass}">-${shock.margin_impact_percent}%</span>`;
 
         document.getElementById("sim-cost-pressure").innerText =
-            (shockImpact * 100).toFixed(1) + "%";
+            shock.cost_pressure_percent + "%";
 
         document.getElementById("sim-risk-class").innerHTML =
-            `<span class="${colorClass}">${riskClass}</span>`;
+            `<span class="${colorClass}">${shock.risk_classification}</span>`;
 
         const meterFill = document.getElementById("shock-fill");
-        meterFill.style.width = Math.min(shockImpact * 200, 100) + "%";
-        meterFill.style.background = meterColor;
+        meterFill.style.width =
+            Math.min(shock.shock_level_score, 100) + "%";
 
         document.getElementById("simulation-result").innerHTML = `
-            This scenario introduces a ${shockLevel.toLowerCase()} trade shock.
-            Profit margins compress by ${percentDrop}% under combined tariff,
-            export restriction, currency volatility, and supply disruption stress.
+            Combined Shock Score: ${shock.shock_level_score}.<br>
+            New Margin: ${shock.new_margin}%.<br>
+            Trade Component: ${shock.trade_shock_component}.<br>
+            Financial Component: ${shock.financial_shock_component}.
         `;
     }
-    
 
-        /* =========================
-       SMOOTH BACKGROUND PARALLAX
-       (ADDED - DOES NOT TOUCH LOGIC)
+
+
+    /* =========================
+       PARALLAX + WORLD MAP (UNCHANGED)
     ========================= */
 
     const orb1 = document.querySelector(".orb-1");
     const orb2 = document.querySelector(".orb-2");
+    const worldMap = document.querySelector(".world-map-bg img");
 
-    let scrollPosition = 0;
-    let isTicking = false;
+    window.addEventListener("scroll", () => {
+        const scroll = window.scrollY;
 
-    function handleParallax() {
-        const slowMove = scrollPosition * 0.08;
-        const fastMove = scrollPosition * 0.15;
+        if (orb1) orb1.style.transform = `translate(-${scroll * 0.08}px, ${scroll * 0.08}px)`;
+        if (orb2) orb2.style.transform = `translate(${scroll * 0.15}px, -${scroll * 0.08}px)`;
 
-        if (orb1) {
-            orb1.style.transform = `translate(-${slowMove}px, ${slowMove}px)`;
-        }
-
-        if (orb2) {
-            orb2.style.transform = `translate(${fastMove}px, -${slowMove}px)`;
-        }
-
-        isTicking = false;
-    }
-
-    window.addEventListener("scroll", function () {
-        scrollPosition = window.scrollY;
-
-        if (!isTicking) {
-            window.requestAnimationFrame(handleParallax);
-            isTicking = true;
+        if (worldMap) {
+            const scale = 1 + scroll * 0.0003;
+            const shift = scroll * 0.05;
+            worldMap.style.transform = `scale(${scale}) translateY(${shift}px)`;
+            worldMap.style.opacity = 0.05 + scroll * 0.0001;
         }
     });
 
-
-
-    /* =========================
-       SMOOTH SECTION SCROLL
-       (VISUAL POLISH ONLY)
-    ========================= */
-
-    function scrollToTopSmooth() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    goRisk.addEventListener("click", scrollToTopSmooth);
-    goSimulation.addEventListener("click", scrollToTopSmooth);
-    backHome1.addEventListener("click", scrollToTopSmooth);
-    backHome2.addEventListener("click", scrollToTopSmooth);
-
-
-
-    /* =========================
-       METER TRANSITION POLISH
-       (PURELY VISUAL)
-    ========================= */
-
-    const shockFill = document.getElementById("shock-fill");
-
-    if (shockFill) {
-        shockFill.style.transition = "width 0.5s ease, background 0.4s ease";
-    }
-    /* =========================
-   WORLD MAP SCROLL EFFECT
-========================= */
-
-const worldMap = document.querySelector(".world-map-bg img");
-
-window.addEventListener("scroll", () => {
-    if (!worldMap) return;
-
-    const scroll = window.scrollY;
-    const scale = 1 + scroll * 0.0003;
-    const shift = scroll * 0.05;
-
-    worldMap.style.transform = `scale(${scale}) translateY(${shift}px)`;
-    worldMap.style.opacity = 0.05 + scroll * 0.0001;
-});
 });

@@ -13,4 +13,4 @@ def recommend_alternatives():
 
     scores.sort(key=lambda x: x[1], reverse=True)
 
-    return [country for country, _ in scores[:2]]
+    return [country for country, _ in scores[:3]]

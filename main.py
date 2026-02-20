@@ -22,26 +22,26 @@ def analyze_business(user_input):
 
     ai_output = run_ai_engine(user_input)
 
-    risk_level = ai_output["predicted_risk_level"]
-    risk_confidence = ai_output["risk_confidence"]
+    risk_level = ai_output.get("predicted_risk_level", "Unknown")
+    risk_confidence = ai_output.get("risk_confidence", 0)
 
-    current_margin = max(0, round(ai_output["current_predicted_margin"], 2))
-    optimized_margin = max(0, round(ai_output["optimized_predicted_margin"], 2))
+    current_margin = max(0, round(ai_output.get("current_predicted_margin", 0), 2))
+    optimized_margin = max(0, round(ai_output.get("optimized_predicted_margin", 0), 2))
 
-    base_margin = user_input["base_margin"]
+    base_margin = user_input.get("base_margin", 20)
     profit_drop = round(base_margin - current_margin, 2)
-    margin_recovery = round(ai_output["margin_recovery"], 2)
+    margin_recovery = round(ai_output.get("margin_recovery", 0), 2)
 
     country_risk_scores = calculate_country_risk()
 
     vulnerability_breakdown, total_vulnerability = calculate_vulnerability(
-        user_input["dependencies"],
+        user_input.get("dependencies", {}),
         country_risk_scores
     )
 
     simulation_result = simulate_shock(
         tariff_factor=total_vulnerability,
-        component_share=user_input["import_cost_share"],
+        component_share=user_input.get("import_cost_share", 40),
         base_margin=base_margin
     )
 
@@ -88,7 +88,7 @@ def analyze_business(user_input):
         "simulation_analysis": simulation_result,
 
         "optimization": {
-            "optimal_dependency_allocation": ai_output["optimal_dependency_allocation"],
+            "optimal_dependency_allocation": ai_output.get("optimal_dependency_allocation", {}),
             "optimized_predicted_margin": optimized_margin,
             "margin_recovery": margin_recovery,
             "optimization_message": optimization_message,

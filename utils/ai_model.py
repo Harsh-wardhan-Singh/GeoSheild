@@ -72,7 +72,7 @@ def optimize_allocation(user_input):
                 "import_cost_share": user_input["import_cost_share"]
             }
 
-            _, predicted_margin = predict_current_state(candidate_input)
+            risk_pred, predicted_margin, confidence = predict_current_state(candidate_input)
 
             if predicted_margin > best_margin:
                 best_margin = predicted_margin

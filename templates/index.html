@@ -90,7 +90,7 @@
             <input type="number" id="dep2" value="20">
 
             <label>Third Country</label>
-            <input type="text" id="country3" value="Germany">
+            <input type="text" id="country3" value="India">
 
             <label>Dependency (%)</label>
             <input type="number" id="dep3" value="10">
@@ -215,6 +215,25 @@
             <label>Currency Volatility (%)</label>
             <input type="range" id="currency-slider" min="0" max="20" value="0">
             <p>Currency Impact: <span id="currency-value">0</span>%</p>
+
+            <div style="margin-top:20px;">
+                <h4>Advanced Economic Controls</h4>
+
+                    <label>Dependency Ratio (0–1)</label>
+                    <input type="number"
+                    id="dependency-ratio"
+                    value="0.6"
+                    step="0.1"
+                    min="0"
+                    max="1">
+
+            <label>Industry Elasticity</label>
+            <select id="industry-elasticity">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+            </select>
+            </div>
 
             <div class="shock-meter">
                 <div class="shock-fill" id="shock-fill"></div>
