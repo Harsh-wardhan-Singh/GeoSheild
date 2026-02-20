@@ -6,11 +6,47 @@
 </head>
 <body>
 
-    <h1>GeoShield AI Dashboard</h1>
+    <div class="container">
 
-    <h2>Country Risk Index</h2>
-    <div id="risk-container">
-        Loading...
+        <h1>GeoShield AI Dashboard</h1>
+
+        <!-- ========================= -->
+        <!-- COUNTRY RISK SECTION -->
+        <!-- ========================= -->
+        <div class="card">
+            <h2>Country Risk Index</h2>
+            <div id="risk-container">
+                Loading risk data...
+            </div>
+        </div>
+
+        <!-- =============================== -->
+        <!-- SUPPLY CHAIN VULNERABILITY -->
+        <!-- =============================== -->
+        <div class="card">
+            <h2>Supply Chain Vulnerability</h2>
+            <p id="vulnerability-score">
+                Calculating...
+            </p>
+        </div>
+
+        <!-- ===================== -->
+        <!-- SHOCK SIMULATOR -->
+        <!-- ===================== -->
+        <div class="card">
+            <h2>Shock Simulator</h2>
+
+            <label for="tariff-slider">Tariff (%):</label>
+            <input type="range" id="tariff-slider" min="0" max="40" value="0">
+
+            <p>Tariff: <span id="tariff-value">0</span>%</p>
+
+            <div id="simulation-result">
+                <p>Base Margin: 20%</p>
+                <p>New Margin: 20%</p>
+            </div>
+        </div>
+
     </div>
 
     <script src="/static/script.js"></script>
