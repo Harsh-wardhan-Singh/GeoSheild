@@ -20,3 +20,5 @@ __pycache__/
 
 test_model.py
 test_app.py
+
+fetch_news.py
