@@ -19,3 +19,4 @@ __pycache__/
 .vscode/
 
 test_model.py
+test_app.py
