@@ -1,31 +1,21 @@
 import json
 from collections import defaultdict
 
-SEVERITY_MULTIPLIER = 8
-MAX_RISK = 100
-
-def load_json(path):
-    with open(path, "r") as f:
-        return json.load(f)
-
 def calculate_country_risk():
-    news = load_json("data/news.json")
-    meta = load_json("data/country_meta.json")
 
-    risk = defaultdict(int)
+    with open("data/news.json") as f:
+        news = json.load(f)
 
-    # Base risk from country meta
-    for country in meta:
-        risk[country] = meta[country]["base_risk"]
+    risk_scores = defaultdict(float)
 
-    # Add news severity impact
     for article in news:
         country = article["country"]
         severity = article["severity"]
-        risk[country] += severity * SEVERITY_MULTIPLIER
 
-    # Cap risk
-    for country in risk:
-        risk[country] = min(risk[country], MAX_RISK)
+        risk_scores[country] += severity * 2  # weight factor
 
-    return dict(risk)
+    # Normalize risk scores
+    for country in risk_scores:
+        risk_scores[country] = round(min(100, risk_scores[country]), 2)
+
+    return risk_scores

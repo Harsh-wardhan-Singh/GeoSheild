@@ -1,15 +1,17 @@
-import numpy as np
+import random
 
-def simulate_shock(total_exposure, base_margin, import_cost_share):
+def simulate_shock(tariff_factor, component_share, base_margin):
 
-    # Shock proportional to exposure and cost share
-    cost_increase = (total_exposure / 100) * import_cost_share
+    cost_increase = tariff_factor * (component_share / 100)
 
-    new_margin = base_margin - cost_increase
+    volatility = random.uniform(-1, 1)
+
+    margin_drop = cost_increase + volatility
+
+    new_margin = base_margin - margin_drop
 
     return {
-        "cost_increase_percent": round(cost_increase, 2),
-        "old_margin": base_margin,
-        "new_margin": round(new_margin, 2),
-        "margin_drop": round(base_margin - new_margin, 2)
+        "cost_increase": round(cost_increase, 2),
+        "margin_drop": round(margin_drop, 2),
+        "new_margin": round(new_margin, 2)
     }

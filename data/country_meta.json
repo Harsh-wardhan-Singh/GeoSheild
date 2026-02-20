@@ -1,6 +1,5 @@
 {
   "China": {"base_risk": 60, "stability": 5},
   "India": {"base_risk": 40, "stability": 7},
-  "Vietnam": {"base_risk": 35, "stability": 8},
-  "USA": {"base_risk": 30, "stability": 9}
+  "Vietnam": {"base_risk": 35, "stability": 8}
 }

@@ -40,9 +40,15 @@ def predict_current_state(user_input):
     features_df = build_feature_dataframe(user_input)
 
     risk_prediction = classifier.predict(features_df)[0]
+    risk_proba = classifier.predict_proba(features_df)[0]
+
+    # Confidence = probability of predicted class
+    class_index = list(classifier.classes_).index(risk_prediction)
+    confidence = risk_proba[class_index]
+
     margin_prediction = regressor.predict(features_df)[0]
 
-    return risk_prediction, float(margin_prediction)
+    return risk_prediction, float(margin_prediction), float(confidence)
 
 def optimize_allocation(user_input):
 
@@ -76,16 +82,17 @@ def optimize_allocation(user_input):
 
 def run_ai_engine(user_input):
 
-    risk_level, predicted_margin = predict_current_state(user_input)
+    risk_level, predicted_margin, risk_confidence = predict_current_state(user_input)
 
     optimal_allocation, optimized_margin = optimize_allocation(user_input)
 
     margin_recovery = optimized_margin - predicted_margin
 
     return {
-        "predicted_risk_level": risk_level,
-        "current_predicted_margin": round(predicted_margin, 2),
-        "optimal_dependency_allocation": optimal_allocation,
-        "optimized_predicted_margin": round(optimized_margin, 2),
-        "margin_recovery": round(margin_recovery, 2)
+    "predicted_risk_level": risk_level,
+    "risk_confidence": round(risk_confidence * 100, 2),
+    "current_predicted_margin": round(predicted_margin, 2),
+    "optimal_dependency_allocation": optimal_allocation,
+    "optimized_predicted_margin": round(optimized_margin, 2),
+    "margin_recovery": round(margin_recovery, 2)
     }

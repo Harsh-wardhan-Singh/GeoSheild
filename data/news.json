@@ -8,27 +8,123 @@
     "date": "2026-02-15"
   },
   {
-    "title": "China restricts rare earth mineral exports",
+    "title": "EU imposes sanctions on Chinese tech manufacturing firms",
     "country": "China",
-    "industry": "rare earths",
-    "event_type": "Export Restriction",
-    "severity": 5,
+    "industry": "electronics",
+    "event_type": "Sanctions",
+    "severity": 4,
     "date": "2026-02-10"
   },
   {
-    "title": "India announces semiconductor subsidy program",
+    "title": "India introduces export restrictions on rare earth materials",
     "country": "India",
-    "industry": "semiconductors",
-    "event_type": "Subsidy",
+    "industry": "mining",
+    "event_type": "Export Ban",
+    "severity": 4,
+    "date": "2026-02-08"
+  },
+  {
+    "title": "Vietnam signs new trade agreement with ASEAN bloc",
+    "country": "Vietnam",
+    "industry": "manufacturing",
+    "event_type": "Trade Agreement",
     "severity": 2,
     "date": "2026-02-05"
   },
   {
-    "title": "Vietnam strengthens trade agreement with EU",
+    "title": "China tightens export controls on advanced AI chips",
+    "country": "China",
+    "industry": "semiconductors",
+    "event_type": "Export Restriction",
+    "severity": 5,
+    "date": "2026-01-28"
+  },
+  {
+    "title": "India announces incentive scheme for electronics manufacturing",
+    "country": "India",
+    "industry": "electronics",
+    "event_type": "Policy Support",
+    "severity": 2,
+    "date": "2026-01-25"
+  },
+  {
+    "title": "Vietnam faces port congestion due to regional tensions",
+    "country": "Vietnam",
+    "industry": "logistics",
+    "event_type": "Logistics Disruption",
+    "severity": 3,
+    "date": "2026-01-20"
+  },
+  {
+    "title": "US expands sanctions targeting Chinese EV battery producers",
+    "country": "China",
+    "industry": "automotive",
+    "event_type": "Sanctions",
+    "severity": 4,
+    "date": "2026-01-18"
+  },
+  {
+    "title": "India reduces tariffs on semiconductor equipment imports",
+    "country": "India",
+    "industry": "semiconductors",
+    "event_type": "Tariff Reduction",
+    "severity": 1,
+    "date": "2026-01-12"
+  },
+  {
+    "title": "Vietnam strengthens trade ties with European Union",
+    "country": "Vietnam",
+    "industry": "manufacturing",
+    "event_type": "Trade Agreement",
+    "severity": 2,
+    "date": "2026-01-10"
+  },
+  {
+    "title": "China faces new WTO complaint over export policies",
+    "country": "China",
+    "industry": "general",
+    "event_type": "Trade Dispute",
+    "severity": 3,
+    "date": "2026-01-05"
+  },
+  {
+    "title": "India logistics strike disrupts supply chain networks",
+    "country": "India",
+    "industry": "logistics",
+    "event_type": "Strike",
+    "severity": 4,
+    "date": "2025-12-28"
+  },
+  {
+    "title": "Vietnam sees increased foreign direct investment in electronics",
     "country": "Vietnam",
     "industry": "electronics",
-    "event_type": "Trade Agreement",
+    "event_type": "Investment",
     "severity": 1,
-    "date": "2026-01-25"
+    "date": "2025-12-22"
+  },
+  {
+    "title": "China announces subsidy cuts impacting solar panel exports",
+    "country": "China",
+    "industry": "renewables",
+    "event_type": "Policy Change",
+    "severity": 3,
+    "date": "2025-12-15"
+  },
+  {
+    "title": "India strengthens export monitoring on defense components",
+    "country": "India",
+    "industry": "defense",
+    "event_type": "Export Restriction",
+    "severity": 3,
+    "date": "2025-12-10"
+  },
+  {
+    "title": "Vietnam faces temporary factory shutdown due to power shortage",
+    "country": "Vietnam",
+    "industry": "manufacturing",
+    "event_type": "Operational Disruption",
+    "severity": 4,
+    "date": "2025-12-05"
   }
 ]

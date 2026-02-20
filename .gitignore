@@ -19,5 +19,3 @@ __pycache__/
 .vscode/
 
 test_app.py
-
-fetch_news.py
