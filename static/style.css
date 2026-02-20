@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    background-color: #0f172a;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+#risk-container p {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+#vulnerability-score {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+input[type="range"] {
+    width: 300px;
+}

@@ -1,0 +1,18 @@
+{
+  "China": {
+    "risk": 75,
+    "stability": 6
+  },
+  "Vietnam": {
+    "risk": 35,
+    "stability": 8
+  },
+  "India": {
+    "risk": 40,
+    "stability": 7
+  },
+  "Mexico": {
+    "risk": 45,
+    "stability": 7
+  }
+}
