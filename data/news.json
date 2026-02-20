@@ -1,0 +1,34 @@
+[
+  {
+    "title": "US announces 25% tariff on Chinese semiconductor imports",
+    "country": "China",
+    "industry": "semiconductors",
+    "event_type": "Tariff",
+    "severity": 5,
+    "date": "2026-02-15"
+  },
+  {
+    "title": "China restricts rare earth mineral exports",
+    "country": "China",
+    "industry": "rare earths",
+    "event_type": "Export Restriction",
+    "severity": 5,
+    "date": "2026-02-10"
+  },
+  {
+    "title": "India announces semiconductor subsidy program",
+    "country": "India",
+    "industry": "semiconductors",
+    "event_type": "Subsidy",
+    "severity": 2,
+    "date": "2026-02-05"
+  },
+  {
+    "title": "Vietnam strengthens trade agreement with EU",
+    "country": "Vietnam",
+    "industry": "electronics",
+    "event_type": "Trade Agreement",
+    "severity": 1,
+    "date": "2026-01-25"
+  }
+]
