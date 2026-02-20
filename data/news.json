@@ -1,23 +1,5 @@
 [
   {
-<<<<<<< HEAD
-    "country": "China",
-    "type": "Export Ban",
-    "severity": "High",
-    "days_ago": 1
-  },
-  {
-    "country": "China",
-    "type": "Tariff",
-    "severity": "Medium",
-    "days_ago": 3
-  },
-  {
-    "country": "Vietnam",
-    "type": "Subsidy",
-    "severity": "Low",
-    "days_ago": 2
-=======
     "title": "US announces 25% tariff on Chinese semiconductor imports",
     "country": "China",
     "industry": "semiconductors",
@@ -48,6 +30,5 @@
     "event_type": "Trade Agreement",
     "severity": 1,
     "date": "2026-01-25"
->>>>>>> 79ee8c746226351f4d77029a305d74e9f6ed950b
   }
 ]
