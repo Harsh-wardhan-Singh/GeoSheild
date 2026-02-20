@@ -1,0 +1,20 @@
+[
+  {
+    "country": "China",
+    "type": "Export Ban",
+    "severity": "High",
+    "days_ago": 1
+  },
+  {
+    "country": "China",
+    "type": "Tariff",
+    "severity": "Medium",
+    "days_ago": 3
+  },
+  {
+    "country": "Vietnam",
+    "type": "Subsidy",
+    "severity": "Low",
+    "days_ago": 2
+  }
+]
