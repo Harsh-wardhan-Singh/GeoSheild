@@ -334,5 +334,85 @@ document.addEventListener("DOMContentLoaded", function () {
             export restriction, currency volatility, and supply disruption stress.
         `;
     }
+    
 
+        /* =========================
+       SMOOTH BACKGROUND PARALLAX
+       (ADDED - DOES NOT TOUCH LOGIC)
+    ========================= */
+
+    const orb1 = document.querySelector(".orb-1");
+    const orb2 = document.querySelector(".orb-2");
+
+    let scrollPosition = 0;
+    let isTicking = false;
+
+    function handleParallax() {
+        const slowMove = scrollPosition * 0.08;
+        const fastMove = scrollPosition * 0.15;
+
+        if (orb1) {
+            orb1.style.transform = `translate(-${slowMove}px, ${slowMove}px)`;
+        }
+
+        if (orb2) {
+            orb2.style.transform = `translate(${fastMove}px, -${slowMove}px)`;
+        }
+
+        isTicking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+        scrollPosition = window.scrollY;
+
+        if (!isTicking) {
+            window.requestAnimationFrame(handleParallax);
+            isTicking = true;
+        }
+    });
+
+
+
+    /* =========================
+       SMOOTH SECTION SCROLL
+       (VISUAL POLISH ONLY)
+    ========================= */
+
+    function scrollToTopSmooth() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    goRisk.addEventListener("click", scrollToTopSmooth);
+    goSimulation.addEventListener("click", scrollToTopSmooth);
+    backHome1.addEventListener("click", scrollToTopSmooth);
+    backHome2.addEventListener("click", scrollToTopSmooth);
+
+
+
+    /* =========================
+       METER TRANSITION POLISH
+       (PURELY VISUAL)
+    ========================= */
+
+    const shockFill = document.getElementById("shock-fill");
+
+    if (shockFill) {
+        shockFill.style.transition = "width 0.5s ease, background 0.4s ease";
+    }
+    /* =========================
+   WORLD MAP SCROLL EFFECT
+========================= */
+
+const worldMap = document.querySelector(".world-map-bg img");
+
+window.addEventListener("scroll", () => {
+    if (!worldMap) return;
+
+    const scroll = window.scrollY;
+    const scale = 1 + scroll * 0.0003;
+    const shift = scroll * 0.05;
+
+    worldMap.style.transform = `scale(${scale}) translateY(${shift}px)`;
+    worldMap.style.opacity = 0.05 + scroll * 0.0001;
+});
 });
