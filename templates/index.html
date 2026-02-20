@@ -1,54 +1,222 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>GeoShield AI</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>GeoShield AI Dashboard</h1>
+    <!-- HEADER -->
+    <div class="header-row">
+        <h1>GeoShield AI</h1>
+        <button id="theme-toggle" class="theme-toggle">Toggle Light Mode</button>
+    </div>
 
-        <!-- ========================= -->
-        <!-- COUNTRY RISK SECTION -->
-        <!-- ========================= -->
-        <div class="card">
-            <h2>Country Risk Index</h2>
-            <div id="risk-container">
-                Loading risk data...
-            </div>
-        </div>
+    <p class="tagline">
+        AI-Driven Geopolitical Risk & Trade Shock Intelligence Platform
+    </p>
 
-        <!-- =============================== -->
-        <!-- SUPPLY CHAIN VULNERABILITY -->
-        <!-- =============================== -->
-        <div class="card">
-            <h2>Supply Chain Vulnerability</h2>
-            <p id="vulnerability-score">
-                Calculating...
+    <!-- ========================= -->
+    <!-- COMMAND CENTER (HOME) -->
+    <!-- ========================= -->
+    <div id="home-section">
+
+        <div class="hero-card">
+            <h2>Strategic Trade Intelligence Command Center</h2>
+            <p>
+                Monitor geopolitical risk exposure, simulate trade shocks,
+                and evaluate structural vulnerabilities in global supply chains.
             </p>
         </div>
 
-        <!-- ===================== -->
-        <!-- SHOCK SIMULATOR -->
-        <!-- ===================== -->
-        <div class="card">
-            <h2>Shock Simulator</h2>
+        <div class="hub-grid">
 
-            <label for="tariff-slider">Tariff (%):</label>
-            <input type="range" id="tariff-slider" min="0" max="40" value="0">
-
-            <p>Tariff: <span id="tariff-value">0</span>%</p>
-
-            <div id="simulation-result">
-                <p>Base Margin: 20%</p>
-                <p>New Margin: 20%</p>
+            <div class="hub-card" id="go-risk">
+                <h3>Geopolitical Risk Assessment</h3>
+                <p>
+                    Analyze country concentration risk, dependency exposure,
+                    and structural supply chain fragility using AI-weighted risk scoring.
+                </p>
+                <div class="hub-tag">Supply Chain Intelligence</div>
             </div>
+
+            <div class="hub-card" id="go-simulation">
+                <h3>Trade Shock Simulation Lab</h3>
+                <p>
+                    Stress test profit margins under tariffs, export bans,
+                    currency volatility, and supply disruptions.
+                </p>
+                <div class="hub-tag">Scenario Modeling Engine</div>
+            </div>
+
         </div>
 
     </div>
 
-    <script src="/static/script.js"></script>
+
+    <!-- ========================= -->
+    <!-- RISK SECTION -->
+    <!-- ========================= -->
+    <div id="risk-section" style="display:none;">
+
+        <div class="card">
+            <h2>Configure Supply Chain Profile</h2>
+
+            <label>Primary Country</label>
+            <input type="text" id="country1" value="China">
+
+            <label>Dependency (%)</label>
+            <input type="number" id="dep1" value="70">
+
+            <label>Secondary Country</label>
+            <input type="text" id="country2" value="Vietnam">
+
+            <label>Dependency (%)</label>
+            <input type="number" id="dep2" value="20">
+
+            <label>Third Country</label>
+            <input type="text" id="country3" value="Germany">
+
+            <label>Dependency (%)</label>
+            <input type="number" id="dep3" value="10">
+
+            <label>Base Profit Margin (%)</label>
+            <input type="number" id="base-margin" value="20">
+
+            <label>Import Cost Share (% of costs)</label>
+            <input type="number" id="import-share" value="40">
+
+            <button id="analyze-btn">Generate Risk Report</button>
+            <button id="back-home-1">Back to Command Center</button>
+        </div>
+
+        <div id="risk-report" style="display:none;">
+
+            <div class="metric-grid">
+                <div class="metric-box">
+                    <div class="metric-title">Exposure Level</div>
+                    <div class="metric-value" id="metric-exposure"></div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-title">Dominant Risk Region</div>
+                    <div class="metric-value" id="metric-region"></div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-title">Shock Sensitivity</div>
+                    <div class="metric-value" id="metric-sensitivity"></div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-title">Profit Stability</div>
+                    <div class="metric-value" id="metric-profit"></div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Executive Risk Report</h3>
+                    <div id="summary-content"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Key Risk Drivers</h3>
+                    <div id="risk-drivers"></div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Policy Alerts</h3>
+                    <div class="alert">
+                        China – Escalating semiconductor export controls.
+                    </div>
+                    <div class="alert">
+                        US – Proposed tariff adjustments under review.
+                    </div>
+                    <div class="alert">
+                        Malaysia – Electronics manufacturing instability.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Strategic Advisory</h3>
+                    <div id="recommendation-content"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SIMULATION SECTION -->
+    <!-- ========================= -->
+    <div id="simulation-section" style="display:none;">
+
+        <div class="metric-grid">
+            <div class="metric-box">
+                <div class="metric-title">Shock Level</div>
+                <div class="metric-value" id="sim-shock-level"></div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-title">Margin Impact</div>
+                <div class="metric-value" id="sim-margin-impact"></div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-title">Cost Pressure</div>
+                <div class="metric-value" id="sim-cost-pressure"></div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-title">Risk Classification</div>
+                <div class="metric-value" id="sim-risk-class"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Trade Shock Scenario Engine</h2>
+
+            <div style="margin-bottom:15px;">
+                <button class="scenario-btn" data-scenario="stable">Stable Trade</button>
+                <button class="scenario-btn" data-scenario="conflict">Escalating Conflict</button>
+                <button class="scenario-btn" data-scenario="severe">Severe Disruption</button>
+            </div>
+
+            <label>Tariff (%)</label>
+            <input type="range" id="tariff-slider" min="0" max="40" value="0">
+            <p>Tariff: <span id="tariff-value">0</span>%</p>
+
+            <label>
+                <input type="checkbox" id="export-ban">
+                Export Restrictions Active
+            </label>
+
+            <label>Supply Disruption Level</label>
+            <select id="disruption-level">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label>Currency Volatility (%)</label>
+            <input type="range" id="currency-slider" min="0" max="20" value="0">
+            <p>Currency Impact: <span id="currency-value">0</span>%</p>
+
+            <div class="shock-meter">
+                <div class="shock-fill" id="shock-fill"></div>
+            </div>
+
+            <div id="simulation-result"></div>
+
+            <button id="back-home-2">Back to Command Center</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
 </body>
 </html>
