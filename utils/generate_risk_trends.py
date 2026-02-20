@@ -18,7 +18,7 @@ def generate_risk_trends():
     start_date = datetime(2025, 9, 1)
     trends = []
 
-    for i in range(30):  # 30 periods (10-day intervals)
+    for i in range(30): 
 
         current_date = start_date + timedelta(days=i * 10)
 

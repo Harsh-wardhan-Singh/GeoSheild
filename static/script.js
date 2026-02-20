@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================
-       THEME TOGGLE
-    ========================= */
 
     const themeToggle = document.getElementById("theme-toggle");
 
@@ -24,9 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =========================
-       FLAG HELPER
-    ========================= */
 
     function getFlag(countryName) {
         const flags = {
@@ -43,9 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       SECTION REFERENCES
-    ========================= */
 
     const homeSection = document.getElementById("home-section");
     const riskSection = document.getElementById("risk-section");
@@ -71,10 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const scenarioButtons = document.querySelectorAll(".scenario-btn");
 
 
-
-    /* =========================
-       NAVIGATION
-    ========================= */
 
     function scrollTopSmooth() {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -106,10 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
-    /* =========================
-       AI RISK ANALYSIS (REAL BACKEND)
-    ========================= */
 
     analyzeBtn.addEventListener("click", async function () {
 

@@ -2,12 +2,9 @@ import joblib
 import pandas as pd
 import json
 
-# Load trained models
-classifier = joblib.load("models/risk_classifier.pkl")
-regressor = joblib.load("models/profit_regressor.pkl")
+classifier = joblib.load("risk_classifier.pkl")
+regressor = joblib.load("profit_regressor.pkl")
 
-# IMPORTANT:
-# These MUST match the exact column order used in training
 FEATURE_COLUMNS = [
     "china_risk", "india_risk", "vietnam_risk",
     "dep_china", "dep_india", "dep_vietnam",
@@ -33,7 +30,6 @@ def build_feature_dataframe(user_input):
         "base_margin": user_input["base_margin"]
     }
 
-    # Convert to DataFrame with correct column order
     return pd.DataFrame([feature_dict], columns=FEATURE_COLUMNS)
 
 def predict_current_state(user_input):
@@ -42,7 +38,6 @@ def predict_current_state(user_input):
     risk_prediction = classifier.predict(features_df)[0]
     risk_proba = classifier.predict_proba(features_df)[0]
 
-    # Confidence = probability of predicted class
     class_index = list(classifier.classes_).index(risk_prediction)
     confidence = risk_proba[class_index]
 

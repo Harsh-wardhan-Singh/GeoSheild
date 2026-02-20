@@ -3,17 +3,10 @@ from main import analyze_business
 
 app = Flask(__name__)
 
-# =====================================
-# Render Home Page
-# =====================================
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
-# =====================================
-# API Endpoint
-# =====================================
 @app.route("/analyze", methods=["POST"])
 def analyze():
 

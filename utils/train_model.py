@@ -32,7 +32,7 @@ regressor_pipeline = Pipeline([
 
 regressor_pipeline.fit(X, y_reg)
 
-joblib.dump(classifier_pipeline, "models/risk_classifier.pkl")
-joblib.dump(regressor_pipeline, "models/profit_regressor.pkl")
+joblib.dump(classifier_pipeline, "risk_classifier.pkl")
+joblib.dump(regressor_pipeline, "profit_regressor.pkl")
 
 print("Models trained and saved.")

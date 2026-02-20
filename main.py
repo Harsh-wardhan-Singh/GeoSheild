@@ -47,7 +47,6 @@ def analyze_business(user_input):
 
     recommended_countries = recommend_alternatives()
 
-    # Risk messaging
     if risk_level in ["High", "Critical"]:
         risk_message = "High geopolitical exposure detected."
     elif risk_level == "Medium":
@@ -55,7 +54,6 @@ def analyze_business(user_input):
     else:
         risk_message = "Supply chain currently stable."
 
-    # Optimization message
     if margin_recovery > 0:
         optimization_message = (
             f"Reallocation could recover approximately {margin_recovery}% margin."

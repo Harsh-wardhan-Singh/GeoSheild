@@ -1,6 +1,3 @@
-/* ========================= */
-/* GLOBAL FOUNDATION */
-/* ========================= */
 
 body {
     margin: 0;
@@ -12,9 +9,6 @@ body {
     scroll-behavior: smooth;
 }
 
-/* ========================= */
-/* BACKGROUND LAYER SYSTEM */
-/* ========================= */
 
 .bg-layer {
     position: fixed;

@@ -12,7 +12,7 @@ def calculate_country_risk():
         country = article["country"]
         severity = article["severity"]
 
-        risk_scores[country] += severity * 2  # weight factor
+        risk_scores[country] += severity * 2  
 
     # Normalize risk scores
     for country in risk_scores:
