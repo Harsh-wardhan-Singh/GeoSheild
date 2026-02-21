@@ -1,9 +1,23 @@
 # 🌍 GeoShield – AI-Powered Geopolitical Risk Intelligence Platform
 
-![Website Preview](assets/website_preview.png)
+![Website Preview](assets/window_preview(1).png)
 
-🔗 **Live Right Now:** https://your-geoshield-app.onrender.com/  
-*(Click above to simulate real-time global trade risk scenarios!)*
+---
+
+![Website Preview](assets/window_preview(1).png)
+
+---
+
+![Website Preview](assets/window_preview(3).png)
+
+---
+
+![Website Preview](assets/window_preview(4).png)
+
+---
+
+🔗 **Live Right Now:** https://geosheild.onrender.com 
+*(Click to simulate real-time global trade risk scenarios!)*
 
 ---
 
@@ -291,7 +305,7 @@ For collaborations please dm us!
 
 ## 🌍 Live Demo
 
-Visit: https://your-geoshield-app.onrender.com/
+Visit: https://geosheild.onrender.com
 
 Simulate your own supply chain risk scenarios today!
 
